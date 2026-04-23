@@ -1,0 +1,3965 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Esforço Vetorial - Engeselt</title>
+    <script src="dados.js"></script>
+    <!-- CORREÇÃO 1: Carregar o arquivo de baixa tensão -->
+       <script>
+        // DADOS DE BAIXA TENSÃO (Embutidos para evitar erro de carregamento)
+        var tabelaEstruturas = [
+          {
+            "formacao": "3x1x35+35",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "3x1x35+35",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "3x1x35+35",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "3x1x35+35",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "3x1x35+35",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "3x1x35+35",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "3x1x70+70",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 245
+          },
+          {
+            "formacao": "3x1x70+70",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 245
+          },
+          {
+            "formacao": "3x1x70+70",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 245
+          },
+          {
+            "formacao": "3x1x70+70",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 245
+          },
+          {
+            "formacao": "3x1x70+70",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 245
+          },
+          {
+            "formacao": "3x1x70+70",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 245
+          },
+          {
+            "formacao": "3x1x120+70",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 381
+          },
+          {
+            "formacao": "3x1x120+70",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 381
+          },
+          {
+            "formacao": "3x1x120+70",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 381
+          },
+          {
+            "formacao": "3x1x120+70",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 381
+          },
+          {
+            "formacao": "3x1x120+70",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 381
+          },
+          {
+            "formacao": "3x1x120+70",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 381
+          },
+          {
+            "formacao": "3x1x185+120",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 703
+          },
+          {
+            "formacao": "3x1x185+120",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 636
+          },
+          {
+            "formacao": "3x1x185+120",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 582
+          },
+          {
+            "formacao": "3x1x185+120",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 804
+          },
+          {
+            "formacao": "3x1x185+120",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 728
+          },
+          {
+            "formacao": "3x1x185+120",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 665
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 152
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x25+25",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 144
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "2x1x35+35",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 155
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 132
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 125
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 121
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 173
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 165
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 238
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 220
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 208
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 181
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 169
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 162
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 234
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 217
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 205
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 278
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 265
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 249
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 133
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 126
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 122
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 187
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 175
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 167
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 241
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 223
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 211
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 183
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 171
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 164
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 237
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 220
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 208
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 291
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 269
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 252
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 137
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 129
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 125
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 192
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 179
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 171
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 248
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 229
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 217
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 188
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 176
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 168
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 244
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 226
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 213
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 300
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 276
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 259
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 140
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 132
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 128
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 197
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 184
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 175
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 255
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 235
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 222
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 193
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 180
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 172
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 250
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 232
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 219
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 308
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 283
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 266
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 145
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 137
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 132
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 205
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 191
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 181
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 265
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 244
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 230
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 201
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 187
+          },
+          {
+            "formacao": "1#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 178
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 260
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 241
+          },
+          {
+            "formacao": "2#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 227
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 320
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 295
+          },
+          {
+            "formacao": "3#4(4)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 276
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 145
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 218
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 290
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 265
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 244
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 230
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 346
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 318
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 297
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 428
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 392
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 364
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 145
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 218
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 290
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 253
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 233
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 220
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 330
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 303
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 284
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 407
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 373
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 348
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 145
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 218
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 290
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 257
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 238
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 224
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 336
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 309
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 289
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 415
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 381
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 354
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 145
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 218
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 290
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 262
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 242
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 228
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 343
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 315
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 295
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 424
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 388
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 361
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 145
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 131
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 218
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 196
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 290
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 261
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 267
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 247
+          },
+          {
+            "formacao": "1#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 232
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 349
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 321
+          },
+          {
+            "formacao": "2#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 300
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 432
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 395
+          },
+          {
+            "formacao": "3#2(2)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 368
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 205
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 308
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 410
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 344
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 317
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 296
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 466
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 426
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 396
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 588
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 536
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 496
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 205
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 308
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 410
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 321
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 295
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 276
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 432
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 396
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 368
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 544
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 496
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 460
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 205
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 308
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 410
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 317
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 292
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 273
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 426
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 390
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 363
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 535
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 489
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 453
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 205
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 308
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 410
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 320
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 295
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 276
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 430
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 394
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 366
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 540
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 493
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 457
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 205
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 185
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 308
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 278
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 410
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 370
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 320
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 295
+          },
+          {
+            "formacao": "1#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 276
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 430
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 394
+          },
+          {
+            "formacao": "2#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 366
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 540
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 493
+          },
+          {
+            "formacao": "3#1/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 457
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 789
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 933
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 847
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 30,
+            "condicao": "Com Controle",
+            "esforco": 779
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 789
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 856
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 778
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 40,
+            "condicao": "Com Controle",
+            "esforco": 716
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 789
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 800
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 727
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 50,
+            "condicao": "Com Controle",
+            "esforco": 670
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 789
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 782
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 712
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 60,
+            "condicao": "Com Controle",
+            "esforco": 656
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 789
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Normal",
+            "esforco": 711
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 10m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 777
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 11m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 706
+          },
+          {
+            "formacao": "3#4/0(1/0)CA",
+            "poste": "Poste 12m",
+            "vao": 80,
+            "condicao": "Com Controle",
+            "esforco": 651
+          }
+        ];
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        eng: {
+                            yellow: '#FFCC00',
+                            graphite: '#333333',
+                            'yellow-light': '#FFE066',
+                            'graphite-light': '#4A4A4A'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root { --eng-yellow: #FFCC00; --eng-graphite: #333333; }
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            color: var(--eng-graphite);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        input[type=number] { -moz-appearance: textfield; }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #FFCC00; border-radius: 3px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #E6B800; }
+
+        .canvas-container {
+            position: relative;
+            background: #1a1a1a;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .legend-overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(51, 51, 51, 0.95);
+            backdrop-filter: blur(4px);
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            pointer-events: none;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #e2e8f0; }
+        .legend-color { width: 10px; height: 10px; border-radius: 50%; }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e5e5e5;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); border-color: #FFCC00; }
+
+        .card-destaque {
+            background: linear-gradient(135deg, #FFCC00 0%, #E6B800 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+            border: 2px solid #FFCC00;
+        }
+
+        .card-identificacao {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e5e5e5;
+            border-left: 4px solid #FFCC00;
+            transition: all 0.2s ease;
+        }
+
+        .card-identificacao:hover { box-shadow: 0 4px 12px rgba(255, 204, 0, 0.15); border-left-width: 6px; }
+
+        .input-projeto {
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-size: 12px;
+            color: #333333;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .input-projeto:focus { outline: none; border-color: #FFCC00; background: white; box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.15); }
+
+        .btn-eng {
+            background-color: #FFCC00;
+            color: #333333;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-eng:hover { background-color: #E6B800; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4); }
+
+        .btn-pdf {
+            background-color: #dc2626;
+            color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-pdf:hover { background-color: #b91c1c; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); }
+
+        .toggle-container { display: flex; background: #e5e5e5; border-radius: 8px; padding: 3px; gap: 3px; }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: transparent;
+            color: #666;
+        }
+
+        .toggle-btn.active { background: #FFCC00; color: #333333; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+        .input-eng {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: #333333;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .input-eng:focus { outline: none; border-color: #FFCC00; box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.2); }
+
+        .secao-card {
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e5e5e5;
+            padding: 12px;
+            margin-bottom: 10px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .secao-card:hover { border-color: #FFCC00; box-shadow: 0 2px 8px rgba(255, 204, 0, 0.1); }
+
+        .secao-card-rompimento {
+            border-left: 5px solid #dc2626;
+            background-color: #fff1f2;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: calc(100vh - 70px);
+            gap: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; height: auto; min-height: calc(100vh - 70px); }
+        }
+
+        .badge-sobrecarga { background: #dc2626; color: white; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+        .badge-ok { background: #16a34a; color: white; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+        .badge-margem { background: #333333; color: #FFCC00; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+        .logo-engeselt { height: 40px; width: auto; object-fit: contain; }
+
+        /* Toggle Switch para Rompimento Individual */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #dc2626; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        .switch-label {
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 8px;
+            text-transform: uppercase;
+        }
+        .label-normal { color: #666; }
+        .label-rompimento { color: #dc2626; }
+    </style>
+</head>
+<body>
+
+    <header class="h-[70px] bg-white border-b border-gray-200 flex items-center justify-between px-6 shadow-sm">
+        <div class="flex items-center gap-4">
+            <img src="https://engeselt.com.br/assets/images/engeseltLogo.svg" alt="Engeselt Logo" class="logo-engeselt">
+            <div>
+                <h1 class="text-lg font-bold text-[#333333]">Cálculo Esforço Vetorial</h1>
+                <p class="text-xs text-gray-500">Engeselt - desenvolvido por Ronaldo Caetano</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="text-right mr-4">
+                <div class="text-xs text-gray-400">Total de Seções</div>
+                <div id="countSecoesHeader" class="text-lg font-bold text-[#FFCC00]">0</div>
+            </div>
+            <button onclick="exportarPDF()" class="btn-pdf text-xs">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Exportar PDF
+            </button>
+        </div>
+    </header>
+
+    <div class="main-grid">
+
+        <div class="bg-gray-50 p-6 overflow-hidden flex flex-col">
+
+            <div class="card-identificacao p-4 mb-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-4 h-4 text-[#FFCC00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="text-xs font-bold text-[#333333] uppercase tracking-wide">Identificação do Projeto</span>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="flex items-center gap-1 text-[10px] text-gray-500 uppercase font-semibold mb-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            Responsável
+                        </label>
+                        <input type="text" id="inputResponsavel" placeholder="Nome do usuário" class="input-projeto">
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-1 text-[10px] text-gray-500 uppercase font-semibold mb-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Data
+                        </label>
+                        <input type="date" id="inputData" class="input-projeto">
+                    </div>
+
+                    <div>
+                        <label class="flex items-center gap-1 text-[10px] text-gray-500 uppercase font-semibold mb-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                            Ponto do Poste (ID)
+                        </label>
+                        <input type="text" id="inputPosteID" placeholder="PT-001" class="input-projeto">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-destaque p-4 mb-4">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-[#333333]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span class="text-sm font-bold text-[#333333] uppercase">Poste Indicado</span>
+                    </div>
+                    <span id="badgeStatus" class="badge-ok">OK</span>
+                </div>
+
+                <div class="flex items-baseline gap-2 mb-2">
+                    <span id="posteIndicado" class="text-4xl font-bold text-[#333333]">--</span>
+                    <span class="text-sm text-[#333333]/70">daN</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 text-xs mb-3">
+                    <div class="bg-white/50 rounded p-2">
+                        <span class="block text-[#333333]/70 text-[10px] uppercase">Altura</span>
+                        <span id="alturaIndicada" class="font-bold text-[#333333]">--</span>
+                    </div>
+                    <div class="bg-white/50 rounded p-2">
+                        <span class="block text-[#333333]/70 text-[10px] uppercase">Esforço Cálculo</span>
+                        <span id="esforcoCalculo" class="font-bold text-[#333333]">--</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <span class="text-[10px] text-[#333333]/80">Tipo de Poste:</span>
+                    <div class="toggle-container">
+                        <button id="btnNovo" class="toggle-btn active" onclick="setTipoPoste('NOVO')">NOVO</button>
+                        <button id="btnExistente" class="toggle-btn" onclick="setTipoPoste('EXISTENTE')">EXISTENTE</button>
+                    </div>
+                </div>
+
+                <div id="infoMargem" class="mt-2 text-[10px] text-[#333333]/80 hidden">
+                    * Margem de 10% aplicada (limite: <span id="limiteMargem">--</span> daN)
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="card p-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-3 h-3 rounded-full bg-[#333333]"></div>
+                        <span class="text-xs font-semibold text-gray-500 uppercase">Poste Circular</span>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span id="resCircular" class="text-3xl font-bold text-[#333333]">0</span>
+                        <span class="text-sm text-gray-400">daN</span>
+                    </div>
+                    <div class="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                        <div id="barCircular" class="h-full bg-[#333333] rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="card p-4 border-l-4 border-l-[#FFCC00]">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-3 h-3 rounded-full bg-[#FFCC00]"></div>
+                        <span class="text-xs font-semibold text-gray-500 uppercase">Poste Duplo T (DT)</span>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span id="resDT" class="text-3xl font-bold text-[#FFCC00]">0</span>
+                        <span class="text-sm text-gray-400">daN</span>
+                    </div>
+                    <div class="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                        <div id="barDT" class="h-full bg-[#FFCC00] rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="card p-3 flex justify-between items-center">
+                    <span class="text-xs text-gray-500">Eixo X (Axial)</span>
+                    <span id="resX" class="font-mono font-bold text-[#333333]">0</span>
+                </div>
+                <div class="card p-3 flex justify-between items-center">
+                    <span class="text-xs text-gray-500">Eixo Y (Lateral)</span>
+                    <span id="resY" class="font-mono font-bold text-[#FFCC00]">0</span>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-hidden flex flex-col card">
+                <div class="px-4 py-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Seções Ativas</span>
+                    <span id="countSecoes" class="text-xs font-semibold text-[#FFCC00] bg-[#FFCC00]/10 px-2 py-1 rounded">0 seções</span>
+                </div>
+
+                <div id="listaSecoes" class="flex-1 overflow-y-auto p-4 custom-scroll">
+                    <div id="msgVazia" class="h-full flex flex-col items-center justify-center text-gray-400">
+                        <svg class="w-12 h-12 mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        <p class="text-sm">Nenhuma seção ativa</p>
+                        <p class="text-xs text-gray-400 mt-1">Adicione uma seção no formulário abaixo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 card p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-bold text-[#333333] uppercase">Adicionar Nova Seção</h3>
+                    <button onclick="adicionarSecao()" class="btn-eng text-xs">+ Adicionar Seção</button>
+                </div>
+
+                <div class="grid grid-cols-6 gap-2 text-xs">
+                    <div>
+                        <label class="block text-gray-500 mb-1 text-[10px] uppercase font-semibold">Rede</label>
+                        <select id="inputTipo" onchange="atualizarCaboSelect()" class="input-eng py-1.5">
+                            <option value="MT">Média Tensão</option>
+                            <option value="BT">Baixa Tensão</option>
+                        </select>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-gray-500 mb-1 text-[10px] uppercase font-semibold">Cabo</label>
+                        <select id="inputCabo" onchange="atualizarCondicaoSelect()" class="input-eng py-1.5"></select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 mb-1 text-[10px] uppercase font-semibold">Cond.</label>
+                        <select id="inputCondicao" class="input-eng py-1.5"></select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 mb-1 text-[10px] uppercase font-semibold">Vão (m)</label>
+                        <input type="number" id="inputVao" value="30" class="input-eng py-1.5 text-center">
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 mb-1 text-[10px] uppercase font-semibold">Altura Poste</label>
+                        <select id="inputPosteAltura" class="input-eng py-1.5">
+                            <option value="10">10m</option>
+                            <option value="11">11m</option>
+                            <option value="12">12m</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label class="block text-gray-500 mb-1 text-[10px] uppercase font-semibold">Ângulo (°) 0~360</label>
+                        <div class="flex">
+                            <input type="number" id="inputAngulo" value="0" placeholder="Ex: -50" class="input-eng py-1.5 text-center font-semibold border-r-0 rounded-r-none">
+                            <div class="bg-gray-100 px-2 py-1.5 rounded-r border border-l-0 border-gray-300 text-gray-500 text-[10px] flex items-center">°</div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 mb-1 text-[10px] uppercase font-semibold">Base (daN)</label>
+                        <input type="text" id="previewBase" value="---" disabled class="w-full bg-gray-100 border border-gray-200 rounded px-2 py-1.5 text-gray-500 text-center cursor-not-allowed font-mono">
+                    </div>
+                </div>
+                <div id="msgInput" class="text-[10px] text-transparent mt-2 h-4 font-medium pointer-events-none"></div>
+            </div>
+        </div>
+
+        <div class="bg-[#333333] p-6 flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-white font-bold text-lg">Monitor de Esforço</h2>
+                    <p class="text-gray-400 text-xs">Visualização vetorial em tempo real</p>
+                </div>
+                <div class="flex gap-4">
+                    <div class="text-right">
+                        <div class="text-[10px] text-gray-400 uppercase">Circular</div>
+                        <div id="resCircularDisplay" class="text-xl font-bold text-white font-mono">0</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-[10px] text-[#FFCC00] uppercase">Duplo T</div>
+                        <div id="resDTDisplay" class="text-xl font-bold text-[#FFCC00] font-mono">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 canvas-container relative" id="canvasContainer">
+                <canvas id="engCanvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+                <div id="legendContainer" class="legend-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Catálogo de cabos
+        const cabosMT = [
+            "1#4(4)",
+            "2#4(4)",
+            "3#4(4)",
+            "1#2(2,25)",
+            "1#2(2)",
+            "2#2(2)",
+            "3#2(2)",
+            "3#1/0(2)",
+            "3#4/0(1/0)",
+            "3#336,4(1/0)",
+            "3#477(2)",
+            "1#4(4)CAA",
+            "2#4(4)CAA",
+            "3#4(4)CAA",
+            "3#50(9,5)",
+            "3#120(9,5)",
+            "3#185(9,5)",
+            "1#1/0(1/0)CAL",
+            "3#1/0(1/0)CAL",
+            "1#2(2)CAA",
+            "2#2(2)CAA",
+            "3#2(2)CAA",
+            "3#1/0(2)CAA",
+            "3#4/0(1/0)CAA",
+            "3#336,4(1/0)CAA"
+        ];
+
+        const cabosBT = [
+            "3x1x35+35",
+            "3x1x70+70",
+            "3x1x120+70",
+            "3x1x185+120",
+            "2x1x25+25",
+            "2x1x35+35",
+            "1#4(4)CA",
+            "2#4(4)CA",
+            "3#4(4)CA",
+            "1#2(2)CA",
+            "2#2(2)CA",
+            "3#2(2)CA",
+            "1#1/0(1/0)CA",
+            "2#1/0(1/0)CA",
+            "3#1/0(1/0)CA",
+            "3#4/0(1/0)CA"
+        ];
+
+        const paletaCores = ['#FFCC00', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE'];
+
+        let secoes = [];
+        let idCounter = 1;
+        let tipoPoste = 'NOVO';
+
+        const canvas = document.getElementById('engCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const catalogoPostes = {
+            11: [300, 600, 1000, 1500],
+            10: [300, 600, 1000, 1500],
+            12: [300, 600, 1000, 1500]
+        };
+
+        const CONSTANTE_DECAIMENTO = -0.0077;
+        const FATOR_ROMPIMENTO = 0.66666;
+
+        function init() {
+            try {
+                // Verifica se as tabelas existem
+                if (typeof tabelaRedes === 'undefined') {
+                    console.warn("dados.js não carregado");
+                }
+                if (typeof tabelaEstruturas === 'undefined') {
+                    console.warn("baixa.js não carregado");
+                    // Não trava o sistema se baixa.js não estiver lá, apenas avisa
+                }
+
+                document.getElementById('inputData').valueAsDate = new Date();
+
+                document.getElementById('inputPosteID').addEventListener('input', function(e) {
+                    let val = e.target.value.toUpperCase();
+                    if (/^\d+$/.test(val)) {
+                        e.target.value = 'P' + val;
+                    } else {
+                        e.target.value = val;
+                    }
+                });
+
+                document.getElementById('inputResponsavel').addEventListener('input', function(e) {
+                    const val = e.target.value;
+                    const words = val.split(' ');
+                    const capitalized = words.map(word => {
+                        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                    });
+                    e.target.value = capitalized.join(' ');
+                });
+
+                document.getElementById('inputPosteAltura').addEventListener('change', atualizarPreviewBase);
+
+                atualizarCaboSelect();
+                resizeCanvas();
+                window.addEventListener('resize', () => { resizeCanvas(); desenharGrafico(); });
+                ['inputCabo', 'inputVao', 'inputCondicao'].forEach(id => {
+                    document.getElementById(id).addEventListener('change', atualizarPreviewBase);
+                    document.getElementById(id).addEventListener('input', atualizarPreviewBase);
+                });
+                atualizarPreviewBase();
+            } catch (e) { alert("Erro na inicialização: " + e.message); }
+        }
+
+        function setTipoPoste(tipo) {
+            tipoPoste = tipo;
+            document.getElementById('btnNovo').classList.toggle('active', tipo === 'NOVO');
+            document.getElementById('btnExistente').classList.toggle('active', tipo === 'EXISTENTE');
+            calcularTotal();
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        }
+
+        function atualizarCaboSelect() {
+            const tipo = document.getElementById('inputTipo').value;
+            const select = document.getElementById('inputCabo');
+            select.innerHTML = '';
+            const lista = (tipo === 'MT') ? cabosMT : cabosBT;
+            lista.forEach(cabo => {
+                const opt = document.createElement('option');
+                opt.value = cabo;
+                opt.textContent = cabo;
+                select.appendChild(opt);
+            });
+            atualizarCondicaoSelect();
+        }
+
+        // CORREÇÃO 2: Lógica unificada para condições (Lê de ambos os arquivos JS)
+        function atualizarCondicaoSelect() {
+            const tipo = document.getElementById('inputTipo').value;
+            const selectCond = document.getElementById('inputCondicao');
+            selectCond.innerHTML = '';
+
+            // Seleciona a tabela correta baseada no tipo (MT ou BT)
+            let tabelaAlvo = (tipo === 'MT') ? tabelaRedes : tabelaEstruturas;
+            
+            // Verifica se a tabela existe (caso o arquivo JS não tenha carregado)
+            if (!tabelaAlvo) {
+                console.warn("Tabela não carregada para o tipo:", tipo);
+                return;
+            }
+
+            const cabo = document.getElementById('inputCabo').value;
+            if (!cabo) return;
+
+            // Busca dinamicamente as condições disponíveis NO ARQUIVO para o cabo selecionado
+            const condicoesDisponiveis = [...new Set(tabelaAlvo.filter(r => r.formacao === cabo).map(r => r.condicao))];
+
+            if (condicoesDisponiveis.length === 0) {
+                console.warn("Nenhuma condição encontrada para o cabo:", cabo);
+                return;
+            }
+
+            // Popula o select
+            condicoesDisponiveis.forEach(cond => {
+                const opt = document.createElement('option');
+                opt.value = cond;
+                opt.textContent = cond;
+                selectCond.appendChild(opt);
+            });
+
+            atualizarPreviewBase();
+        }
+
+        function encontrarVaoMaisProximo(inputVao, listaVaos) {
+            if (!listaVaos || listaVaos.length === 0) return inputVao;
+            let melhorVao = listaVaos[0], menorDif = Infinity;
+            listaVaos.forEach(vao => {
+                const diff = Math.abs(vao - inputVao);
+                if (diff < menorDif || (diff === menorDif && vao > melhorVao)) {
+                    menorDif = diff;
+                    melhorVao = vao;
+                }
+            });
+            return melhorVao;
+        }
+
+        function atualizarPreviewBase() {
+            try {
+                const tipo = document.getElementById('inputTipo').value;
+                const cabo = document.getElementById('inputCabo').value;
+                const vaoDigitado = parseFloat(document.getElementById('inputVao').value);
+                const condicao = document.getElementById('inputCondicao').value;
+                const posteAltura = document.getElementById('inputPosteAltura').value;
+                const previewEl = document.getElementById('previewBase');
+
+                if (!cabo || !condicao) {
+                    previewEl.value = "---";
+                    document.getElementById('previewBase').style.color = "#9ca3af";
+                    return;
+                }
+
+                // Seleciona a tabela de dados com base no tipo de rede
+                let tabelaAlvo = (tipo === 'MT') ? tabelaRedes : tabelaEstruturas;
+
+                if (!tabelaAlvo) {
+                    previewEl.value = "---";
+                    document.getElementById('previewBase').style.color = "#9ca3af";
+                    return;
+                }
+
+                const matches = tabelaAlvo.filter(r =>
+                    r.formacao === cabo &&
+                    r.condicao === condicao &&
+                    r.poste.includes(posteAltura) &&
+                    parseInt(r.vao) === encontrarVaoMaisProximo(vaoDigitado, [...new Set(tabelaAlvo.filter(rr => rr.formacao === cabo && rr.condicao === condicao && rr.poste.includes(posteAltura)).map(rr => parseInt(rr.vao)))])
+                );
+
+                if (matches.length > 0) {
+                    previewEl.value = Math.max(...matches.map(m => parseFloat(m.esforco))).toFixed(0);
+                    document.getElementById('previewBase').style.color = "#333333";
+                } else {
+                    previewEl.value = "---";
+                    document.getElementById('previewBase').style.color = "#9ca3af";
+                }
+            } catch (e) {
+                console.error("Erro no preview", e);
+                document.getElementById('previewBase').value = "---";
+                document.getElementById('previewBase').style.color = "#9ca3af";
+            }
+        }
+
+        function adicionarSecao() {
+            try {
+                const tipo = document.getElementById('inputTipo').value;
+                const cabo = document.getElementById('inputCabo').value;
+                const condicao = document.getElementById('inputCondicao').value;
+                const vao = document.getElementById('inputVao').value;
+                const posteAltura = document.getElementById('inputPosteAltura').value;
+                const angulo = parseFloat(document.getElementById('inputAngulo').value);
+                const baseVal = parseFloat(document.getElementById('previewBase').value);
+
+                if (isNaN(baseVal) || document.getElementById('previewBase').value === "---") return alert("Verifique os dados.");
+
+                const rad = (angulo * Math.PI) / 180;
+                const x = baseVal * Math.cos(rad);
+                const y = baseVal * Math.sin(rad);
+                const cor = paletaCores[(secoes.length) % paletaCores.length];
+
+                secoes.push({
+                    id: idCounter++,
+                    tipo,
+                    cabo,
+                    condicao,
+                    vao,
+                    posteAltura,
+                    angulo,
+                    baseForce: baseVal,
+                    x,
+                    y,
+                    cor,
+                    rompimento: false
+                });
+
+                renderizarLista();
+                calcularTotal();
+                desenharGrafico();
+            } catch (e) { alert("Erro ao adicionar seção: " + e.message); }
+        }
+
+        function toggleRompimento(id) {
+            const secao = secoes.find(s => s.id === id);
+            if (secao) {
+                secao.rompimento = !secao.rompimento;
+                renderizarLista();
+                calcularTotal();
+                desenharGrafico();
+            }
+        }
+
+        function removerSecao(id) {
+            secoes = secoes.filter(s => s.id !== id);
+            renderizarLista();
+            calcularTotal();
+            desenharGrafico();
+        }
+
+        function renderizarLista() {
+            const listaEl = document.getElementById('listaSecoes');
+            const msgVaziaEl = document.getElementById('msgVazia');
+            const countEl = document.getElementById('countSecoes');
+            const countHeaderEl = document.getElementById('countSecoesHeader');
+
+            countEl.textContent = `${secoes.length} seção(ões)`;
+            countHeaderEl.textContent = secoes.length;
+
+            if (secoes.length === 0) {
+                listaEl.innerHTML = '';
+                listaEl.appendChild(msgVaziaEl);
+                msgVaziaEl.style.display = 'flex';
+                return;
+            }
+
+            msgVaziaEl.style.display = 'none';
+            listaEl.innerHTML = '';
+            listaEl.appendChild(msgVaziaEl);
+
+            secoes.forEach(s => {
+                const card = document.createElement('div');
+                card.className = `secao-card flex flex-col md:flex-row justify-between items-center gap-3 group ${s.rompimento ? 'secao-card-rompimento' : ''}`;
+
+                const forcaExibida = s.rompimento ? s.baseForce * FATOR_ROMPIMENTO : s.baseForce;
+                const labelRompimento = s.rompimento ? " (Rompida)" : "";
+
+                card.innerHTML = `
+                    <div class="flex items-center gap-3 w-full md:w-auto">
+                        <div class="w-4 h-4 rounded-full shadow-sm" style="background-color: ${s.cor}"></div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded ${s.tipo==='MT'?'bg-gray-800 text-white':'bg-[#FFCC00] text-[#333333]'} uppercase">${s.tipo}</span>
+                                <span class="text-sm font-bold text-[#333333]">${s.cabo}${labelRompimento}</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500 mt-0.5">${s.condicao} | Vão: ${s.vao}m | Altura: ${s.posteAltura}m | <span class="text-[#333333] font-mono font-semibold">${forcaExibida.toFixed(0)}daN</span> @ <span class="text-[#FFCC00] font-mono font-semibold">${s.angulo}°</span></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between w-full md:w-auto mt-2 md:mt-0">
+                        <div class="flex items-center mr-4">
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleRompimento(${s.id})" ${s.rompimento ? 'checked' : ''}>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="switch-label ${s.rompimento ? 'label-rompimento' : 'label-normal'}">${s.rompimento ? 'ROMPIMENTO' : 'NORMAL'}</span>
+                        </div>
+
+                        <div class="text-right grid grid-cols-2 gap-3 text-[11px] font-mono border-t md:border-t-0 md:border-l border-gray-200 pt-2 md:pt-0 md:pl-3">
+                            <div class="text-center">
+                                <span class="block text-[10px] text-gray-400 uppercase">X</span>
+                                <span class="${s.x > 0 ? 'text-gray-700' : 'text-red-500'} font-semibold">${s.x.toFixed(1)}</span>
+                            </div>
+                            <div class="text-center">
+                                <span class="block text-[10px] text-gray-400 uppercase">Y</span>
+                                <span class="${s.y > 0 ? 'text-gray-700' : 'text-red-500'} font-semibold">${s.y.toFixed(1)}</span>
+                            </div>
+                        </div>
+
+                        <button onclick="removerSecao(${s.id})" class="text-gray-400 hover:text-red-500 p-2 transition rounded-lg hover:bg-red-50 ml-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                listaEl.appendChild(card);
+            });
+        }
+
+        function calcularPosteRecomendado(resultanteVetorial, maiorEsforcoBase) {
+            const temMT = secoes.some(s => s.tipo === 'MT');
+            const alturaRecomendada = temMT ? 11 : 10;
+            const esforcoCalculo = Math.max(resultanteVetorial, maiorEsforcoBase);
+            const postesDisponiveis = catalogoPostes[alturaRecomendada];
+            let cargaIndicada = null;
+            let usouMargem = false;
+
+            for (let carga of postesDisponiveis) {
+                const limiteSeguranca = carga * 1.10;
+                if (esforcoCalculo <= limiteSeguranca) {
+                    cargaIndicada = carga;
+                    if (esforcoCalculo > carga) usouMargem = true;
+                    break;
+                }
+            }
+
+            if (!cargaIndicada) cargaIndicada = postesDisponiveis[postesDisponiveis.length - 1];
+
+            return {
+                altura: alturaRecomendada,
+                carga: cargaIndicada,
+                esforcoCalculo: esforcoCalculo,
+                usouMargem: usouMargem,
+                limiteSeguranca: cargaIndicada * 1.10
+            };
+        }
+
+        function calcularEsforcoDT(esforcoResultante, anguloGraus) {
+            let anguloAbs = Math.abs(anguloGraus) % 360;
+            let anguloRelativoX = anguloAbs % 180;
+            let anguloX = (anguloRelativoX > 90) ? (180 - anguloRelativoX) : anguloRelativoX;
+            let anguloY = 90 - anguloX;
+
+            const fatorX = Math.exp(CONSTANTE_DECAIMENTO * anguloX);
+            const fatorY = Math.exp(CONSTANTE_DECAIMENTO * anguloY);
+
+            let fatorEscolhido;
+            if (anguloX < anguloY) {
+                fatorEscolhido = fatorX;
+            } else {
+                fatorEscolhido = fatorY;
+            }
+
+            const esforcoCorrigido = esforcoResultante / fatorEscolhido;
+
+            return {
+                esforcoCorrigido: esforcoCorrigido,
+                fatorUtilizacao: fatorEscolhido,
+                anguloResultante: anguloRelativoX
+            };
+        }
+
+        function calcularTotal() {
+            let totalX = 0, totalY = 0;
+            let maiorEsforcoBase = 0;
+
+            secoes.forEach(s => {
+                const forcaCalculada = s.rompimento ? s.baseForce * FATOR_ROMPIMENTO : s.baseForce;
+                const rad = (s.angulo * Math.PI) / 180;
+
+                const x = forcaCalculada * Math.cos(rad);
+                const y = forcaCalculada * Math.sin(rad);
+
+                totalX += x;
+                totalY += y;
+
+                if (s.baseForce > maiorEsforcoBase) maiorEsforcoBase = s.baseForce;
+            });
+
+            const resultanteCircular = Math.sqrt(Math.pow(totalX, 2) + Math.pow(totalY, 2));
+
+            let resultanteDT;
+            let anguloResultanteGraus = 0;
+
+            if (resultanteCircular === 0) {
+                resultanteDT = 0;
+                anguloResultanteGraus = 0;
+            } else {
+                let anguloAbsoluto = (Math.atan2(totalY, totalX) * 180 / Math.PI);
+                anguloResultanteGraus = anguloAbsoluto;
+
+                const resultadoDT = calcularEsforcoDT(resultanteCircular, anguloAbsoluto);
+                resultanteDT = resultadoDT.esforcoCorrigido;
+            }
+
+            let esforcoFinalCalculo = resultanteDT;
+            if (tipoPoste === 'EXISTENTE') {
+                esforcoFinalCalculo = resultanteDT * 1.10;
+            }
+
+            const recomendacao = calcularPosteRecomendado(esforcoFinalCalculo, maiorEsforcoBase);
+
+            const posteEl = document.getElementById('posteIndicado');
+            const alturaEl = document.getElementById('alturaIndicada');
+            const esforcoEl = document.getElementById('esforcoCalculo');
+            const badgeEl = document.getElementById('badgeStatus');
+            const margemEl = document.getElementById('infoMargem');
+            const limiteMargemEl = document.getElementById('limiteMargem');
+
+            if (secoes.length === 0) {
+                posteEl.textContent = '--';
+                alturaEl.textContent = '--';
+                esforcoEl.textContent = '--';
+                badgeEl.textContent = 'OK';
+                badgeEl.className = 'badge-ok';
+                margemEl.classList.add('hidden');
+            } else {
+                posteEl.textContent = recomendacao.carga;
+                alturaEl.textContent = recomendacao.altura + ' m';
+                esforcoEl.textContent = esforcoFinalCalculo.toFixed(1) + ' daN';
+
+                const limiteSeguranca = recomendacao.limiteSeguranca;
+
+                if (esforcoFinalCalculo > limiteSeguranca) {
+                    badgeEl.textContent = 'SOBRECARGA';
+                    badgeEl.className = 'badge-sobrecarga';
+                } else if (esforcoFinalCalculo > recomendacao.carga) {
+                    badgeEl.textContent = 'MARGEM 10%';
+                    badgeEl.className = 'badge-margem';
+                } else {
+                    badgeEl.textContent = 'OK';
+                    badgeEl.className = 'badge-ok';
+                }
+
+                margemEl.classList.remove('hidden');
+                limiteMargemEl.textContent = recomendacao.limiteSeguranca.toFixed(0);
+            }
+
+            document.getElementById('resCircular').textContent = resultanteCircular.toFixed(1);
+            document.getElementById('resCircularDisplay').textContent = resultanteCircular.toFixed(1);
+            document.getElementById('resDT').textContent = resultanteDT.toFixed(1);
+            document.getElementById('resDTDisplay').textContent = resultanteDT.toFixed(1);
+            document.getElementById('resX').textContent = totalX.toFixed(1);
+            document.getElementById('resY').textContent = totalY.toFixed(1);
+
+            const maxVal = Math.max(resultanteCircular, resultanteDT, 1);
+            document.getElementById('barCircular').style.width = `${(resultanteCircular / maxVal) * 100}%`;
+            document.getElementById('barDT').style.width = `${(resultanteDT / maxVal) * 100}%`;
+        }
+
+        function desenharGrafico() {
+            setTimeout(() => {
+                try {
+                    resizeCanvas();
+                    const w = canvas.width, h = canvas.height, cx = w / 2, cy = h / 2;
+                    ctx.clearRect(0, 0, w, h);
+
+                    ctx.strokeStyle = '#4A4A4A'; ctx.lineWidth = 1; const gridSize = 30;
+                    ctx.beginPath();
+                    for(let x = cx % gridSize; x < w; x+=gridSize) { ctx.moveTo(x, 0); ctx.lineTo(x, h); }
+                    for(let y = cy % gridSize; y < h; y+=gridSize) { ctx.moveTo(0, y); ctx.lineTo(w, y); }
+                    ctx.stroke();
+
+                    ctx.strokeStyle = '#666666'; ctx.lineWidth = 2;
+                    ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
+
+                    let totalX = 0, totalY = 0;
+                    secoes.forEach(s => {
+                         const forcaCalculada = s.rompimento ? s.baseForce * FATOR_ROMPIMENTO : s.baseForce;
+                         const rad = (s.angulo * Math.PI) / 180;
+                         totalX += forcaCalculada * Math.cos(rad);
+                         totalY += forcaCalculada * Math.sin(rad);
+                    });
+
+                    let maxVal = 0;
+                    secoes.forEach(s => {
+                        const forcaCalculada = s.rompimento ? s.baseForce * FATOR_ROMPIMENTO : s.baseForce;
+                        const rad = (s.angulo * Math.PI) / 180;
+                        const lx = forcaCalculada * Math.cos(rad);
+                        const ly = forcaCalculada * Math.sin(rad);
+                        maxVal = Math.max(maxVal, Math.abs(lx), Math.abs(ly));
+                    });
+
+                    const escalaMax = (maxVal === 0) ? 500 : maxVal;
+                    const raioMax = Math.min(w, h) / 2 - 50;
+                    const scale = raioMax / escalaMax;
+
+                    ctx.fillStyle = '#FFCC00'; ctx.beginPath(); ctx.arc(cx, cy, 8, 0, Math.PI * 2); ctx.fill();
+                    ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 2; ctx.stroke();
+
+                    ctx.strokeStyle = '#4A4A4A'; ctx.lineWidth = 1; ctx.setLineDash([5, 5]);
+                    ctx.beginPath(); ctx.arc(cx, cy, raioMax * 0.5, 0, Math.PI * 2); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(cx, cy, raioMax * 0.75, 0, Math.PI * 2); ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    secoes.forEach(s => {
+                        const forcaCalculada = s.rompimento ? s.baseForce * FATOR_ROMPIMENTO : s.baseForce;
+                        const rad = (s.angulo * Math.PI) / 180;
+                        const px = cx + (forcaCalculada * Math.cos(rad) * scale);
+                        const py = cy - (forcaCalculada * Math.sin(rad) * scale);
+
+                        if (s.rompimento) {
+                            ctx.setLineDash([4, 4]);
+                            desenharSeta(ctx, cx, cy, px, py, '#dc2626', 2);
+                        } else {
+                            ctx.setLineDash([]);
+                            desenharSeta(ctx, cx, cy, px, py, s.cor, 2);
+                        }
+
+                        const label = String.fromCharCode(65 + (s.id % 26));
+                        ctx.fillStyle = s.rompimento ? '#dc2626' : s.cor;
+                        ctx.font = 'bold 12px Inter, sans-serif';
+                        ctx.fillText(label, px + 10, py);
+                    });
+
+                    if (Math.abs(totalX) > 1 || Math.abs(totalY) > 1) {
+                        const rx = cx + (totalX * scale);
+                        const ry = cy - (totalY * scale);
+                        ctx.setLineDash([5, 5]);
+                        desenharSeta(ctx, cx, cy, rx, ry, '#FFCC00', 4);
+                        ctx.setLineDash([]);
+                        ctx.fillStyle = '#FFCC00'; ctx.beginPath(); ctx.arc(rx, ry, 6, 0, Math.PI * 2); ctx.fill();
+                        ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 2; ctx.stroke();
+                    }
+                    atualizarLegendaHTML();
+                } catch (e) { console.error("Erro ao desenhar gráfico:", e); }
+            }, 10);
+        }
+
+        function desenharSeta(ctx, x1, y1, x2, y2, cor, width) {
+            ctx.strokeStyle = cor; ctx.fillStyle = cor; ctx.lineWidth = width;
+            ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+            const headLen = 12; const angle = Math.atan2(y2 - y1, x2 - x1);
+            ctx.beginPath(); ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - headLen * Math.cos(angle - Math.PI / 6), y2 - headLen * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(x2 - headLen * Math.cos(angle + Math.PI / 6), y2 - headLen * Math.sin(angle + Math.PI / 6));
+            ctx.lineTo(x2, y2); ctx.fill();
+        }
+
+        function atualizarLegendaHTML() {
+            const legendaEl = document.getElementById('legendContainer');
+            if (secoes.length === 0) { legendaEl.style.display = 'none'; return; }
+            legendaEl.style.display = 'flex'; legendaEl.innerHTML = '';
+
+            let temRompimento = false;
+
+            secoes.forEach((s, index) => {
+                const label = String.fromCharCode(65 + (s.id % 26));
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+
+                let corLegenda = s.cor;
+                let textoLabel = `<b>${label}</b> (${s.tipo})`;
+
+                if (s.rompimento) {
+                    corLegenda = '#dc2626';
+                    textoLabel += ' [ROMP]';
+                    temRompimento = true;
+                }
+
+                item.innerHTML = `<div class="legend-color" style="background-color: ${corLegenda}; box-shadow: 0 0 4px ${corLegenda}"></div><span>${textoLabel}</span>`;
+                legendaEl.appendChild(item);
+            });
+
+            let totalX = 0, totalY = 0;
+            secoes.forEach(s => {
+                const forcaCalculada = s.rompimento ? s.baseForce * FATOR_ROMPIMENTO : s.baseForce;
+                const rad = (s.angulo * Math.PI) / 180;
+                totalX += forcaCalculada * Math.cos(rad);
+                totalY += forcaCalculada * Math.sin(rad);
+            });
+
+            if (Math.abs(totalX) > 1 || Math.abs(totalY) > 1) {
+                const resItem = document.createElement('div');
+                resItem.className = 'legend-item border-l-2 border-[#FFCC00] pl-2';
+                resItem.innerHTML = `<div class="legend-color" style="background-color: #FFCC00; box-shadow: 0 0 6px #FFCC00"></div><span style="color: #FFCC00;"><b>RESULTANTE</b></span>`;
+                legendaEl.appendChild(resItem);
+            }
+        }
+
+        // Variável global para guardar o diretório escolhido
+let pastaDestino = null;
+
+async function exportarPDF() {
+    const userName = document.getElementById('inputResponsavel').value.trim();
+    const calcDate = document.getElementById('inputData').value;
+    const polePoint = document.getElementById('inputPosteID').value.trim();
+
+    if (!userName || !calcDate || !polePoint) {
+        alert("⚠️ Preencha todos os campos obrigatórios:\n• Responsável\n• Data\n• Ponto do Poste (ID)");
+        return;
+    }
+
+    if (secoes.length === 0) {
+        alert("⚠️ Adicione pelo menos uma seção para gerar o relatório.");
+        return;
+    }
+
+    const btn = document.querySelector('.btn-pdf');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = 'Gerando PDF...';
+    btn.disabled = true;
+
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
+        const pageWidth = 210;
+        const pageHeight = 297;
+        const margin = 15;
+        let currentY = 10;
+
+        try {
+            const logoUrl = 'https://engeselt.com.br/assets/images/engeseltLogo.svg';
+            doc.addImage(logoUrl, 'SVG', 85, 5, 40, 10);
+        } catch (e) {
+            doc.setFillColor(255, 204, 0);
+            doc.rect(75, 5, 60, 10, 'F');
+            doc.setTextColor(51, 51, 51);
+            doc.setFont('helvetica', 'bold');
+            doc.text("ENGESELT", 105, 12, { align: 'center' });
+        }
+
+        doc.setDrawColor(255, 204, 0);
+        doc.setLineWidth(1);
+        doc.line(margin, 18, pageWidth - margin, 18);
+
+        doc.setFontSize(14);
+        doc.setTextColor(51, 51, 51);
+        doc.setFont('helvetica', 'bold');
+        doc.text("CALCULO ESFORÇO VETORIAL", 105, 25, { align: 'center' });
+
+        currentY = 32;
+
+        doc.setFontSize(9);
+        doc.setTextColor(100, 100, 100);
+        doc.setFont('helvetica', 'bold');
+        doc.text("PROJETISTA:", margin, currentY);
+        doc.text("DATA:", margin + 60, currentY);
+        doc.text("POSTE:", margin + 110, currentY);
+
+        doc.setTextColor(51, 51, 51);
+        doc.setFont('helvetica', 'normal');
+        doc.text(userName, margin, currentY + 5);
+        const [ano, mes, dia] = calcDate.split('-');
+        doc.text(`${dia}/${mes}/${ano}`, margin + 60, currentY + 5);
+        doc.text(polePoint, margin + 110, currentY + 5);
+
+        doc.setDrawColor(200, 200, 200);
+        doc.setLineWidth(0.2);
+        doc.line(margin, currentY + 8, pageWidth - margin, currentY + 8);
+
+        currentY += 14;
+
+        doc.setFontSize(10);
+        doc.setTextColor(51, 51, 51);
+        doc.setFont('helvetica', 'bold');
+        doc.text("DETALHAMENTO DAS SEÇÕES E TRAÇÕES", margin, currentY);
+        currentY += 5;
+
+        const tableStartY = currentY;
+        const rowHeight = 7;
+        const col1 = 15;
+        const col2 = 65;
+        const col3 = 20;
+        const col4 = 25;
+        const col5 = 25;
+        const tableWidth = col1+col2+col3+col4+col5;
+
+        doc.setFillColor(51, 51, 51);
+        doc.rect(margin, tableStartY, tableWidth, rowHeight, 'F');
+
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(8);
+        doc.text("TIPO", margin + 2, tableStartY + 5);
+        doc.text("CABO / COND", margin + col1 + 2, tableStartY + 5);
+        doc.text("ÂNG", margin + col1 + col2 + col3/2, tableStartY + 5, {align: 'center'});
+        doc.text("TRAÇÃO (daN)", margin + col1 + col2 + col3 + 2, tableStartY + 5);
+        doc.text("Rx | Ry", margin + col1 + col2 + col3 + col4 + 2, tableStartY + 5);
+
+        currentY = tableStartY + rowHeight;
+        doc.setTextColor(60, 60, 60);
+        doc.setFont('helvetica', 'normal');
+
+        secoes.forEach((s, i) => {
+            if (currentY > 180) {
+                doc.setFontSize(7);
+                doc.text("... (Lista truncada para layout de uma página)", margin, currentY);
+                currentY += rowHeight;
+                return;
+            }
+
+            if (s.rompimento) {
+                doc.setFillColor(254, 226, 226);
+            } else if (i % 2 === 0) {
+                doc.setFillColor(245, 245, 245);
+            } else {
+                doc.setFillColor(255, 255, 255);
+            }
+
+            if(s.rompimento || i % 2 === 0) {
+                doc.rect(margin, currentY, tableWidth, rowHeight, 'F');
+            }
+
+            doc.setFontSize(8);
+            doc.setTextColor(0,0,0);
+            doc.setFont('helvetica', 'bold');
+
+            let textoTipo = s.tipo;
+            if(s.rompimento) textoTipo += " (Romp)";
+            doc.text(textoTipo, margin + 2, currentY + 5);
+
+            doc.setFont('helvetica', 'normal');
+            let caboTxt = s.cabo;
+            if(caboTxt.length > 18) caboTxt = caboTxt.substring(0,16) + "..";
+            doc.text(caboTxt, margin + col1 + 2, currentY + 5);
+            doc.text(s.angulo + "°", margin + col1 + col2 + col3/2, currentY + 5, {align: 'center'});
+
+            const forcaCalculada = s.rompimento ? s.baseForce * FATOR_ROMPIMENTO : s.baseForce;
+
+            if(s.rompimento) doc.setTextColor(220, 38, 38);
+            else doc.setTextColor(0, 0, 150);
+            doc.text(forcaCalculada.toFixed(0), margin + col1 + col2 + col3 + 2, currentY + 5);
+
+            doc.setTextColor(80, 80, 80);
+            const rad = (s.angulo * Math.PI) / 180;
+            const displayX = forcaCalculada * Math.cos(rad);
+            const displayY = forcaCalculada * Math.sin(rad);
+            doc.text(`${displayX.toFixed(0)} | ${displayY.toFixed(0)}`, margin + col1 + col2 + col3 + col4 + 2, currentY + 5);
+
+            doc.setDrawColor(230, 230, 230);
+            doc.setLineWidth(0.1);
+            doc.line(margin, currentY + rowHeight, margin + tableWidth, currentY + rowHeight);
+
+            currentY += rowHeight;
+        });
+
+        doc.setDrawColor(150, 150, 150);
+        doc.setLineWidth(0.5);
+        doc.rect(margin, tableStartY, tableWidth, currentY - tableStartY);
+
+        currentY += 8;
+
+        const visualAreaHeight = 55;
+        const canvasW = 85;
+        const canvasH = 45;
+        const summaryW = 95;
+        const summaryH = 45;
+
+        doc.setFillColor(30, 30, 30);
+        doc.roundedRect(margin, currentY, canvasW, canvasH + 10, 2, 2, 'F');
+        doc.setTextColor(150, 150, 150);
+        doc.setFontSize(7);
+        doc.text("DIAGRAMA VETORIAL", margin + 42, currentY + 5, {align:'center'});
+
+        const canvasEl = document.getElementById('engCanvas');
+        const canvasImg = canvasEl.toDataURL('image/jpeg', 0.8);
+        doc.addImage(canvasImg, 'JPEG', margin + 2.5, currentY + 6, canvasW - 5, canvasH);
+
+        const summaryX = margin + canvasW + 5;
+        doc.setFillColor(250, 250, 250);
+        doc.roundedRect(summaryX, currentY, summaryW, canvasH + 10, 2, 2, 'FD');
+
+        doc.setTextColor(80, 80, 80);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.text("RESULTADOS DO CÁLCULO", summaryX + 5, currentY + 7);
+
+        const miniY = currentY + 12;
+        const rowMiniH = 8;
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.text("Resultante Circular:", summaryX + 8, miniY + rowMiniH);
+        doc.setTextColor(0,0,0);
+        doc.setFont('helvetica', 'bold');
+        doc.text(document.getElementById('resCircular').textContent + " daN", summaryX + summaryW - 8, miniY + rowMiniH, {align:'right'});
+
+        doc.setDrawColor(220,220,220);
+        doc.line(summaryX + 5, miniY + rowMiniH + 3, summaryX + summaryW - 5, miniY + rowMiniH + 3);
+
+        doc.setTextColor(80,80,80);
+        doc.setFont('helvetica', 'normal');
+        doc.text("Resultante Duplo T:", summaryX + 8, miniY + rowMiniH*2 + 2);
+        doc.setTextColor(255, 165, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text(document.getElementById('resDT').textContent + " daN", summaryX + summaryW - 8, miniY + rowMiniH*2 + 2, {align:'right'});
+
+        doc.setDrawColor(200,200,200);
+        doc.roundedRect(summaryX, currentY, summaryW, canvasH + 10, 2, 2, 'S');
+
+        currentY += visualAreaHeight + 10;
+
+        const boxHeight = 28;
+        doc.setFillColor(230, 184, 0);
+        doc.roundedRect(margin + 1, currentY + 1, pageWidth - margin*2, boxHeight, 5, 5, 'F');
+        doc.setFillColor(255, 204, 0);
+        doc.roundedRect(margin, currentY, pageWidth - margin*2, boxHeight, 5, 5, 'F');
+
+        doc.setTextColor(51, 51, 51);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        doc.text("POSTE INDICADO PARA O PROJETO", margin + 10, currentY + 8);
+
+        const posteIndicado = document.getElementById('posteIndicado').textContent;
+        const alturaIndicada = document.getElementById('alturaIndicada').textContent;
+        const badgeStatus = document.getElementById('badgeStatus').textContent;
+
+        doc.setFontSize(20);
+        doc.text(posteIndicado + " daN", margin + 15, currentY + 22);
+        doc.setFontSize(10);
+        doc.text("Altura: " + alturaIndicada, margin + 50, currentY + 16);
+        doc.text("Tipo: " + tipoPoste, margin + 50, currentY + 22);
+
+        const isSobrecarga = badgeStatus.includes('SOBRECARGA');
+        const isMargem = badgeStatus.includes('MARGEM');
+        let badgeColor = [22, 163, 74];
+        if (isSobrecarga) badgeColor = [220, 38, 38];
+        if (isMargem) badgeColor = [51, 51, 51];
+
+        doc.setFillColor(...badgeColor);
+        doc.setTextColor(255, 255, 255);
+        doc.roundedRect(pageWidth - margin - 35, currentY + 8, 30, 12, 3, 3, 'F');
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'bold');
+        doc.text(badgeStatus, pageWidth - margin - 20, currentY + 15, { align: 'center' });
+
+        currentY += boxHeight + 10;
+
+        doc.setFillColor(245, 245, 245);
+        doc.rect(margin, currentY, pageWidth - margin*2, 30, 'F');
+
+        doc.setTextColor(100, 100, 100);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7);
+
+        const notes = [
+            "NOTAS TÉCNICAS:",
+            "• Fx = F x cos(a) | Fy = F x sin(a)",
+            "• Poste Circular: Resultante vetorial direta.",
+            "• Poste DT: Seleção de eixo baseada na menor inclinação. Fator = exp(-0.0077 * ang).",
+            "• Cálculo Final: Esforço Resultante / Fator Selecionado.",
+            "• Rompimento: Aplicado redutor de 0.6666 na tração da seção marcada.",
+            "• Poste Existente: Margem de 10% aplicada sobre o esforço final.",
+            "• Velocidade Básica do vento no Brasil varia geralmente entre 30 m/s e 50 m/s"
+        ];
+
+        notes.forEach((note, idx) => {
+            doc.text(note, margin + 3, currentY + 5 + (idx * 4.5));
+        });
+
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text("Engeselt - Página 1/1", 105, 285, { align: 'center' });
+
+        // ─── SALVAR COM FILE SYSTEM ACCESS API ───────────────────────────
+        const nomeArquivo = "Calculo esforço " + polePoint + ".pdf";
+        const pdfBlob = doc.output('blob');
+
+        // Verifica se o browser suporta a API
+        if (window.showDirectoryPicker) {
+            try {
+                // Se ainda não tem pasta escolhida, abre o seletor
+                if (!pastaDestino) {
+                    pastaDestino = await window.showDirectoryPicker({ mode: 'readwrite' });
+                    // Mostra indicador visual de pasta ativa
+                    atualizarIndicadorPasta();
+                }
+
+                // Tenta salvar diretamente na pasta memorizada
+                try {
+                    const fileHandle = await pastaDestino.getFileHandle(nomeArquivo, { create: true });
+                    const writable = await fileHandle.createWritable();
+                    await writable.write(pdfBlob);
+                    await writable.close();
+                    mostrarToast(`✅ Salvo em: ${pastaDestino.name}/${nomeArquivo}`);
+                } catch (err) {
+                    // Pasta pode ter sido revogada — pede nova
+                    if (err.name === 'NotAllowedError' || err.name === 'SecurityError') {
+                        pastaDestino = await window.showDirectoryPicker({ mode: 'readwrite' });
+                        atualizarIndicadorPasta();
+                        const fileHandle = await pastaDestino.getFileHandle(nomeArquivo, { create: true });
+                        const writable = await fileHandle.createWritable();
+                        await writable.write(pdfBlob);
+                        await writable.close();
+                        mostrarToast(`✅ Salvo em: ${pastaDestino.name}/${nomeArquivo}`);
+                    } else {
+                        throw err;
+                    }
+                }
+            } catch (err) {
+                if (err.name === 'AbortError') {
+                    // Usuário cancelou o seletor — fallback para Downloads
+                    doc.save(nomeArquivo);
+                } else {
+                    throw err;
+                }
+            }
+        } else {
+            // Browser não suporta (Firefox) — baixa normalmente em Downloads
+            doc.save(nomeArquivo);
+            mostrarToast('⚠️ Seu navegador não suporta seleção de pasta. Salvo em Downloads.');
+        }
+
+    } catch (error) {
+        console.error("Erro ao gerar PDF:", error);
+        alert("Erro ao gerar PDF: " + error.message);
+    } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }
+}
+
+// ─── Indicador de pasta ativa no header ──────────────────────────────────────
+function atualizarIndicadorPasta() {
+    let indicador = document.getElementById('indicadorPasta');
+    if (!indicador) {
+        indicador = document.createElement('div');
+        indicador.id = 'indicadorPasta';
+        indicador.style.cssText = `
+            display: flex; align-items: center; gap: 6px;
+            background: #1a1a1a; border: 1px solid #FFCC00;
+            border-radius: 6px; padding: 4px 10px;
+            font-size: 11px; color: #FFCC00; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+            max-width: 200px; overflow: hidden;
+        `;
+        indicador.title = "Clique para trocar de pasta";
+        indicador.onclick = () => { pastaDestino = null; mostrarToast('📁 Próximo PDF pedirá a pasta novamente.'); atualizarIndicadorPasta(); };
+        // Insere antes do botão PDF no header
+        const btnPdf = document.querySelector('.btn-pdf');
+        btnPdf.parentElement.insertBefore(indicador, btnPdf);
+    }
+
+    if (pastaDestino) {
+        indicador.innerHTML = `
+            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/>
+            </svg>
+            <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                ${pastaDestino.name}
+            </span>
+            <span style="color:#666;font-size:9px;flex-shrink:0">✕ trocar</span>
+        `;
+        indicador.style.display = 'flex';
+    } else {
+        indicador.style.display = 'none';
+    }
+}
+
+// ─── Toast de notificação ─────────────────────────────────────────────────────
+function mostrarToast(msg) {
+    let toast = document.getElementById('toastMsg');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastMsg';
+        toast.style.cssText = `
+            position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+            background: #333; color: #fff; padding: 12px 20px;
+            border-radius: 8px; font-size: 13px; font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-left: 4px solid #FFCC00;
+            transition: opacity 0.4s; opacity: 0;
+            max-width: 380px;
+        `;
+        document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => { toast.style.opacity = '0'; }, 3500);
+}
+
+        window.onload = init;
+    </script>
+</body>
+</html>
